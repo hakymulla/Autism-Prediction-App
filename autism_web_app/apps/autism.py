@@ -7,19 +7,21 @@ import pickle
 from PIL import Image
 from datetime import datetime
 
+path = 'autism_web_app/model'
+
 def load_label_dict():
-    with open('label_encode.json', 'r') as file:
+    with open(f'{path}/label_encode.json', 'r') as file:
         json_file = json.load(file)
         return json_file
 
 def load_model():
-    with open('lgbm.pkl', 'rb') as file:
+    with open(f'{path}/lgbm.pkl', 'rb') as file:
         model = pickle.load(file)
         return model
 
 def app():
-    # dict_file = load_label_dict()
-    # model = load_model()
+    dict_file = load_label_dict()
+    model = load_model()
 
     choices1 = {'Definitely Agree':1, 'Slightly Agree':1, 'Definitely Disagree':0, 'Slightly Disagree':0}
     choices2 = {'Definitely Agree':0, 'Slightly Agree':0, 'Definitely Disagree':1, 'Slightly Disagree':1}
@@ -109,23 +111,23 @@ def app():
                     'age', 'gender', 'ethnicity', 'jaundice', 'autism', 'country_of_residence', 'used_app_before', 'result', 'relation'
             ]
         
-        # for key in dict_file.keys():
-        #     try:
-        #         df[key] = df[key].map(dict_file[key])
-        #     except KeyError:
-        #         pass
-        # int_col = ['A1_Score', 'A2_Score', 'A3_Score', 'A4_Score', 'A5_Score','A6_Score', 'A7_Score', 'A8_Score', 'A9_Score', 'A10_Score', 'age', 'result']
-        # for col in int_col:
-        #     df[col] = df[col].astype('int')
+        for key in dict_file.keys():
+            try:
+                df[key] = df[key].map(dict_file[key])
+            except KeyError:
+                pass
+        int_col = ['A1_Score', 'A2_Score', 'A3_Score', 'A4_Score', 'A5_Score','A6_Score', 'A7_Score', 'A8_Score', 'A9_Score', 'A10_Score', 'age', 'result']
+        for col in int_col:
+            df[col] = df[col].astype('int')
 
-        #     inv_dict = {v:k for k,v in dict_file['Class/ASD'].items()}
+            inv_dict = {v:k for k,v in dict_file['Class/ASD'].items()}
 
-        # prediction = model.predict(df)
+        prediction = model.predict(df)
         
 
-        # autism_diagnosis = inv_dict.get(prediction[0])
-        # if autism_diagnosis == 'Yes':
-        #     st.success(f'You do have Autism')
-        # if autism_diagnosis == 'No':
-        #     st.success(f"You Don't have Autism")
+        autism_diagnosis = inv_dict.get(prediction[0])
+        if autism_diagnosis == 'Yes':
+            st.success(f'You do have Autism')
+        if autism_diagnosis == 'No':
+            st.success(f"You Don't have Autism")
 

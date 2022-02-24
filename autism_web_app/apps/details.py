@@ -4,12 +4,13 @@ from datetime import datetime
 from apps import autism
 import os
 
+path = 'autism_web_app/model'
 
 def app():
 
-    # image_autism = Image.open('autism.jpg')
-    # image_autism = image_autism.resize((800, 300))
-    # st.image(image_autism)
+    image_autism = Image.open(f'{path}/autism.jpg')
+    image_autism = image_autism.resize((800, 300))
+    st.image(image_autism)
 
     
 
@@ -40,7 +41,7 @@ def app():
 
     """)
 
-    # image = Image.open('aq10.png')
-    # image = image.resize((800, 1000))
+    image = Image.open(f'{path}/aq10.png')
+    image = image.resize((800, 1000))
 
-    # st.image(image, caption = 'Autism spectrum quotient (AQ-10) test')
+    st.image(image, caption = 'Autism spectrum quotient (AQ-10) test')
