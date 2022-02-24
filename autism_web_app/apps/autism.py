@@ -8,12 +8,12 @@ from PIL import Image
 from datetime import datetime
 
 def load_label_dict():
-    with open('model/label_encode.json', 'r') as file:
+    with open('../model/label_encode.json', 'r') as file:
         json_file = json.load(file)
         return json_file
 
 def load_model():
-    with open('model/lgbm.pkl', 'rb') as file:
+    with open('../model/lgbm.pkl', 'rb') as file:
         model = pickle.load(file)
         return model
 
