@@ -11,14 +11,7 @@ def app():
     image_autism = Image.open(f'{path}/autism.jpg')
     image_autism = image_autism.resize((800, 300))
     st.image(image_autism)
-
     
-
-    cwd = os.getcwd()  # Get the current working directory (cwd)
-    files = os.listdir(cwd)  # Get all the files in that directory
-    print("Files in %r: %s" % (cwd, files))
-    st.write(cwd)
-    st.write(files)
     st.markdown("""
     # Autism Prediction App
 
