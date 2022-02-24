@@ -2,13 +2,20 @@ import streamlit as st
 from PIL import Image
 from datetime import datetime
 from apps import autism
+import os
 
 
 def app():
 
-    image_autism = Image.open('autism.jpg')
-    image_autism = image_autism.resize((800, 300))
-    st.image(image_autism)
+    # image_autism = Image.open('autism.jpg')
+    # image_autism = image_autism.resize((800, 300))
+    # st.image(image_autism)
+
+    
+
+    cwd = os.getcwd()  # Get the current working directory (cwd)
+    files = os.listdir(cwd)  # Get all the files in that directory
+    print("Files in %r: %s" % (cwd, files))
 
     st.markdown("""
     # Autism Prediction App
@@ -32,7 +39,7 @@ def app():
 
     """)
 
-    image = Image.open('aq10.png')
-    image = image.resize((800, 1000))
+    # image = Image.open('aq10.png')
+    # image = image.resize((800, 1000))
 
-    st.image(image, caption = 'Autism spectrum quotient (AQ-10) test')
+    # st.image(image, caption = 'Autism spectrum quotient (AQ-10) test')
