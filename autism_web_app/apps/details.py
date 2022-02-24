@@ -6,7 +6,7 @@ from apps import autism
 
 def app():
 
-    image_autism = Image.open('./model/autism.jpg')
+    image_autism = Image.open('autism.jpg')
     image_autism = image_autism.resize((800, 300))
     st.image(image_autism)
 
@@ -32,7 +32,7 @@ def app():
 
     """)
 
-    image = Image.open('./model/aq10.png')
+    image = Image.open('aq10.png')
     image = image.resize((800, 1000))
 
     st.image(image, caption = 'Autism spectrum quotient (AQ-10) test')
