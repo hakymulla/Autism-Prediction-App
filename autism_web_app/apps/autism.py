@@ -9,15 +9,23 @@ from datetime import datetime
 
 path = 'autism_web_app/model'
 
+@st.cache
 def load_label_dict():
     with open(f'{path}/label_encode.json', 'r') as file:
         json_file = json.load(file)
         return json_file
 
+@st.cache
 def load_model():
     with open(f'{path}/lgbm.pkl', 'rb') as file:
         model = pickle.load(file)
         return model
+
+@st.cache
+def load_country():
+    with open(f'{path}/country.pkl', 'rb') as file:
+        country_list = pickle.load(file)
+        return country_list
 
 def app():
     dict_file = load_label_dict()
@@ -29,18 +37,8 @@ def app():
     ethnicities = ['Black', 'White-European', 'South Asian', 'Asian', 'Middle Eastern', 'others', 'Latino', 'Turkish', 'Others', 'Hispanic', 'Pasifika']
     yes_no = ['Yes', 'No']
     relations = ['Self', 'Health care professional', 'Parent', 'Relative','Others']
-    countries = ['United States', 'Australia', 'United Kingdom', 'New Zealand',
-        'Italy', 'Nicaragua', 'Canada', 'United Arab Emirates',
-        'Netherlands', 'Sri Lanka', 'India', 'Armenia', 'Sierra Leone',
-        'Argentina', 'Azerbaijan', 'Iceland', 'Egypt', 'Serbia',
-        'Afghanistan', 'Costa Rica', 'Jordan', 'Angola', 'Pakistan',
-        'Brazil', 'Ireland', 'Kazakhstan', 'Viet Nam', 'Ethiopia',
-        'Austria', 'Finland', 'France', 'Malaysia', 'Japan', 'Spain',
-        'Philippines', 'Iran', 'Czech Republic', 'Russia', 'Romania',
-        'Mexico', 'Belgium', 'Aruba', 'Uruguay', 'Indonesia', 'Ukraine',
-        'AmericanSamoa', 'Germany', 'China', 'Iraq', 'Tonga',
-        'South Africa', 'Saudi Arabia', 'Hong Kong', 'Bahamas', 'Ecuador',
-        'Cyprus', 'Bangladesh', 'Oman', 'Bolivia', 'Sweden', 'Niger']
+    countries = load_country()
+
     st.markdown(""" 
             ##  AQ-10 
             ### Autism Spectrum Quotient (AQ)
@@ -91,6 +89,10 @@ def app():
     ethnicity = st.selectbox('Ethnicity', ethnicities)
     jaundice = st.selectbox('Whether the patient had Jaundice at the time of birth', yes_no)
     country = st.selectbox('Country of Residence', countries)
+    try:
+        dict_file[country]
+    except KeyError:
+        country = 'Others'
     austism = st.selectbox('Whether an immediate family member has been diagnosed with autism', yes_no)
     used_app_before = st.selectbox('Whether the patient has undergone a screening test before', yes_no)
     relations = st.selectbox('Relation of patient who completed the test', relations)

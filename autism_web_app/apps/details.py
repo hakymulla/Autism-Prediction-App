@@ -11,7 +11,7 @@ def app():
     image_autism = Image.open(f'{path}/autism.jpg')
     image_autism = image_autism.resize((800, 300))
     st.image(image_autism)
-    
+
     st.markdown("""
     # Autism Prediction App
 
