@@ -13,3 +13,5 @@ More Information About Autism: [autismspeaks] (https://www.autismspeaks.org/what
 These resources are implementation tools and should be used alongside the published guidance. The information does not supersede or replace the guidance itself.
 
 Get More Information Here : [National Institute for Care and Health Excellence] (https://www.nice.org.uk/guidance/cg142/resources/autism-spectrum-quotient-aq10-test-143968)
+
+Interact with the App : (https://share.streamlit.io/hakymulla/autism-prediction-app/main/autism_web_app/app.py)
