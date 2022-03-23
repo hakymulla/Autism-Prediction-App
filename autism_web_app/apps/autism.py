@@ -129,7 +129,7 @@ def app():
 
         autism_diagnosis = inv_dict.get(prediction[0])
         if autism_diagnosis == 'Yes':
-            st.success(f'You do have Autism')
+            st.success(f'You Might have Autism, Please Visit a Specialist')
         if autism_diagnosis == 'No':
             st.success(f"You Don't have Autism")
 
